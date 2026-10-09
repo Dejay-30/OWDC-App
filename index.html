@@ -1,126 +1,88 @@
 
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OWDC - One World Digital Crypto</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
-body{background:#0a0a0a;color:#fff;min-height:100vh}
-.header{position:sticky;top:0;background:#0a0a0a;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222;z-index:10}
-.menuBtn{font-size:24px;cursor:pointer;padding:5px 10px}
-.logoSmall{width:36px;height:36px;border-radius:50%;border:2px solid #d4af37;overflow:hidden}
-.logoSmall img{width:100%;height:100%;object-fit:cover}
-.title{color:#d4af37;font-weight:900;font-size:14px}
-.drawer{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#111;border-right:1px solid #333;z-index:100;transition:0.3s;padding:20px}
-.drawer.open{left:0}
-.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:99;display:none}
-.overlay.show{display:block}
-.drawerHead{display:flex;align-items:center;gap:12px;margin-bottom:25px;padding-bottom:15px;border-bottom:1px solid #222}
-.drawerLogo{width:50px;height:50px;border-radius:50%;border:2px solid #d4af37;overflow:hidden}
-.drawerLogo img{width:100%;height:100%}
-.menuItem{padding:14px 12px;border-radius:10px;margin-bottom:6px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;color:#ccc}
-.menuItem.active{background:#1a1a1a;color:#d4af37;border-left:3px solid #d4af37}
-.menuItem:hover{background:#151515}
-.page{display:none;padding:20px;max-width:420px;margin:0 auto;width:100%}
-.page.active{display:flex;flex-direction:column;align-items:center}
-.bigLogo{width:110px;height:110px;border-radius:50%;border:3px solid #d4af37;overflow:hidden;box-shadow:0 0 30px gold;margin-bottom:15px;background:#111}
-.bigLogo img{width:100%;height:100%;object-fit:cover}
-.bal{font-size:42px;font-weight:900;margin-top:15px}
-.usd{color:#888;font-size:13px}
-.btn{width:100%;max-width:380px;background:linear-gradient(135deg,#d4af37,#00ff88);padding:18px;border-radius:16px;text-align:center;margin-top:18px;font-weight:900;color:#000;cursor:pointer;border:none}
-.btn.mining{background:linear-gradient(135deg,#ff3333,#ff8888);color:#fff;animation:pulse 1s infinite}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-.card{width:100%;background:#151515;padding:16px;border-radius:14px;margin-top:16px;border:1px solid #222}
-.input{width:100%;background:#222;color:#fff;padding:13px;border-radius:10px;border:1px solid #333;margin-top:10px}
-.withBtn{background:#fff;color:#000;padding:14px;border-radius:10px;margin-top:10px;text-align:center;font-weight:900;cursor:pointer}
-.refBtn{background:#111;border:1.5px solid #00ff88;padding:13px;border-radius:10px;margin-top:10px;text-align:center;color:#00ff88;font-weight:800;cursor:pointer}
-.dot{width:30px;height:8px;background:#333;border-radius:10px;display:inline-block;margin-right:6px}.dot.on{background:#00ff88}
-.note{color:#666;font-size:10px;margin-top:8px;text-align:center}
-.statRow{display:flex;justify-content:space-between;width:100%;margin-top:12px;font-size:13px}
-.statBox{background:#111;padding:12px;border-radius:10px;width:48%;text-align:center;border:1px solid #222}
-</style></head><body>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}body{background:#0a0a0a;color:#fff;min-height:100vh}.header{position:sticky;top:0;background:#0a0a0a;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #222;z-index:20}.menuBtn{font-size:26px;cursor:pointer;background:#1a1a1a;width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid #333}.title{color:#d4af37;font-weight:900;font-size:12px;letter-spacing:1px}.logoSmall{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#00ff88);display:flex;align-items:center;justify-content:center;font-size:20px;border:2px solid #d4af37}.drawer{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#111;border-right:1px solid #333;z-index:100;transition:0.3s ease;padding:20px;overflow-y:auto}.drawer.open{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:99;display:none}.overlay.show{display:block}.drawerHead{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:15px;border-bottom:1px solid #222}.drawerLogo{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#00ff88);display:flex;align-items:center;justify-content:center;font-size:26px;border:2px solid #d4af37}.menuItem{padding:14px 12px;border-radius:10px;margin-bottom:6px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:13px;color:#ccc;background:#0a0a0a;border:1px solid #1a1a1a}.menuItem.active{background:#1a1a1a;color:#d4af37;border-left:3px solid #d4af37}.page{display:none;padding:20px;max-width:420px;margin:0 auto;width:100%;flex-direction:column;align-items:center}.page.active{display:flex}.bigLogo{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#d4af37,#00ff88);display:flex;align-items:center;justify-content:center;font-size:55px;border:3px solid #d4af37;box-shadow:0 0 30px rgba(212,175,55,0.5);margin-bottom:15px}.bal{font-size:40px;font-weight:900;margin-top:12px}.usd{color:#888;font-size:13px;margin-top:4px}.btn{width:100%;max-width:380px;background:linear-gradient(135deg,#d4af37,#00ff88);padding:18px;border-radius:16px;text-align:center;margin-top:18px;font-weight:900;color:#000;cursor:pointer;border:none;font-size:14px}.btn.mining{background:linear-gradient(135deg,#ff3333,#ff7777);color:#fff}.card{width:100%;background:#151515;padding:16px;border-radius:14px;margin-top:16px;border:1px solid #222}.input{width:100%;background:#222;color:#fff;padding:13px;border-radius:10px;border:1px solid #333;margin-top:10px}.withBtn{background:#fff;color:#000;padding:14px;border-radius:10px;margin-top:10px;text-align:center;font-weight:900;cursor:pointer}.refBtn{background:#111;border:1.5px solid #00ff88;padding:13px;border-radius:10px;margin-top:10px;text-align:center;color:#00ff88;font-weight:800;cursor:pointer}.dot{width:30px;height:8px;background:#333;border-radius:10px;display:inline-block;margin-right:6px}.dot.on{background:#00ff88}.statRow{display:flex;justify-content:space-between;width:100%;margin-top:12px}.statBox{background:#111;padding:12px;border-radius:10px;width:48%;text-align:center;border:1px solid #222}</style></head><body>
 
 <div class="header">
-<span class="menuBtn" onclick="openMenu()">☰</span>
-<span class="title">ONE WORLD DIGITAL CRYPTO</span>
-<div class="logoSmall"><img src="logo.png" onerror="this.src='https://i.ibb.co/3fQ8yWg/world.png'"></div>
+<div class="menuBtn" onclick="openMenu()">☰</div>
+<div class="title">ONE WORLD DIGITAL CRYPTO</div>
+<div class="logoSmall">🌍</div>
 </div>
 
 <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 <div class="drawer" id="drawer">
 <div class="drawerHead">
-<div class="drawerLogo"><img src="logo.png" onerror="this.src='https://i.ibb.co/3fQ8yWg/world.png'"></div>
-<div><div style="color:#d4af37;font-weight:900;font-size:14px">OWDC</div><div style="font-size:10px;color:#00ff88">50/DAY • 500=$5 • OFFLINE</div><div style="font-size:11px;margin-top:4px" id="drawerCode">Code: OWDC----</div></div>
+<div class="drawerLogo">🌍</div>
+<div><div style="color:#d4af37;font-weight:900">OWDC</div><div style="font-size:10px;color:#00ff88">50/DAY • 500=$5 • OFFLINE</div><div style="font-size:11px;margin-top:4px;color:#fff" id="drawerCode">Code: Loading...</div></div>
 </div>
 <div class="menuItem active" onclick="showPage('home',this)">🏠 Dashboard & Mining</div>
 <div class="menuItem" onclick="showPage('wallet',this)">💰 Wallet & Withdraw</div>
-<div class="menuItem" onclick="showPage('invite',this)">👥 Invite & Earn 10 OWDC</div>
+<div class="menuItem" onclick="showPage('invite',this)">👥 Invite & Earn</div>
 <div class="menuItem" onclick="showPage('how',this)">📖 How It Works</div>
-<div class="menuItem" onclick="showPage('support',this)">💬 Support WhatsApp</div>
-<div class="menuItem" onclick="showPage('about',this)">🌍 About One World</div>
-<div style="margin-top:30px;padding:12px;background:#1a1a1a;border-radius:10px;font-size:10px;color:#555;text-align:center">OWDC V2 Menu Edition<br>One World One Coin<br>Admin: 08163172077</div>
+<div class="menuItem" onclick="showPage('support',this)">💬 Support</div>
+<div class="menuItem" onclick="showPage('about',this)">🌍 About OWDC</div>
+<div style="margin-top:25px;padding:10px;background:#0a0a0a;border-radius:10px;font-size:10px;color:#555;text-align:center">OWDC V3 - Fixed Menu<br>One World One Coin<br>08163172077</div>
 </div>
 
-<!-- HOME / DASHBOARD -->
 <div class="page active" id="home">
-<div class="bigLogo"><img src="logo.png" onerror="this.src='https://i.ibb.co/3fQ8yWg/world.png'"></div>
-<h1 style="color:#d4af37;font-size:20px;text-align:center">ONE WORLD DIGITAL CRYPTO</h1>
-<div style="color:#00ff88;font-size:10px;margin-top:5px">OFFLINE WORLD MINING</div>
+<div class="bigLogo">🌍</div>
+<h1 style="color:#d4af37;font-size:18px">ONE WORLD DIGITAL CRYPTO</h1>
+<div style="color:#00ff88;font-size:10px;margin-top:5px">OFFLINE WORLD MINING • 500 MIN = $5</div>
 <div class="bal" id="bal">0.0000 OWDC</div>
 <div class="usd" id="usd">≈ $0.00 USDT</div>
 <button class="btn" id="mineBtn" onclick="toggleMine()">▶ START MINING 50 OWDC/DAY</button>
 <div class="statRow"><div class="statBox"><div style="color:#888;font-size:11px">Today</div><div style="font-weight:800;margin-top:4px" id="todayEarn">0 OWDC</div></div><div class="statBox"><div style="color:#888;font-size:11px">Rate</div><div style="font-weight:800;margin-top:4px">50 / DAY</div></div></div>
-<div class="card" style="width:100%"><div style="font-weight:800;font-size:12px">Mining Status: <span id="mineStatus" style="color:#00ff88">OFFLINE READY</span></div><div class="note" id="mineNote">Works without data. Mines even when app closed. 10 days = 500 OWDC = $5</div></div>
+<div class="card"><div style="font-weight:800;font-size:12px">Status: <span id="mineStatus" style="color:#00ff88">READY OFFLINE</span></div><div style="color:#666;font-size:10px;margin-top:6px">Works without data. 10 days = 500 OWDC = $5. Mines even when closed.</div></div>
 </div>
 
-<!-- WALLET -->
 <div class="page" id="wallet">
-<h2 style="color:#d4af37">💰 Wallet & Withdraw</h2>
+<h2 style="color:#d4af37">💰 Wallet</h2>
 <div class="bal" id="bal2">0.0000 OWDC</div>
 <div class="usd" id="usd2">≈ $0.00 USDT</div>
-<div class="card"><div style="font-weight:800;font-size:12px">Withdraw USDT BEP20 - #<span id="wn">1</span> - Min: 500 OWDC ($5)</div><div style="margin-top:10px;font-size:11px;color:#888">Balance needed: 500 OWDC. You earn 50/day.</div><input class="input" id="walletAddr" placeholder="Your USDT BEP20 address (Trust Wallet)"><div class="withBtn" onclick="withdraw()">💸 WATCH AD & WITHDRAW $5</div><div class="note" id="note">1st withdraw FREE, 2nd needs 3 referrals. Paid in 24hrs via WhatsApp</div></div>
-<div class="card"><div style="font-weight:800;font-size:12px">Withdraw History</div><div style="font-size:11px;color:#666;margin-top:8px" id="hist">No withdraws yet. Mine 500 OWDC first.</div></div>
+<div class="card"><div style="font-weight:800;font-size:12px">Withdraw #<span id="wn">1</span> - Min 500 OWDC ($5)</div><input class="input" id="walletAddr" placeholder="Your USDT BEP20 address"><div class="withBtn" onclick="withdraw()">💸 WATCH AD & WITHDRAW $5</div><div style="color:#666;font-size:10px;margin-top:8px;text-align:center" id="note">1st FREE, 2nd needs 3 refs. Paid 24hrs WhatsApp</div></div>
 </div>
 
-<!-- INVITE -->
 <div class="page" id="invite">
 <h2 style="color:#00ff88">👥 Invite & Earn</h2>
-<div class="card"><div style="font-weight:800">My Referral Code</div><div style="font-size:28px;font-weight:900;color:#d4af37;margin-top:10px;letter-spacing:2px" id="codeBig">OWDC----</div><div style="font-size:11px;color:#888;margin-top:6px">Share this code - Friends get 10 OWDC FREE</div><div class="refBtn" onclick="invite()" style="margin-top:15px">📤 INVITE FRIENDS & EARN 10 OWDC EACH</div></div>
-<div class="card"><div style="font-weight:800;font-size:12px">My Referrals: <span id="refCount">0</span>/3 needed for 2nd withdraw</div><div style="margin-top:10px"><span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div><div style="margin-top:10px;font-size:12px" id="refList">No referrals yet. Invite 3 friends to unlock unlimited withdraws.</div></div>
+<div class="card"><div style="font-weight:800">My Code</div><div style="font-size:30px;font-weight:900;color:#d4af37;margin-top:10px;letter-spacing:2px" id="codeBig">OWDC----</div><div class="refBtn" onclick="invite()">📤 INVITE & EARN 10 OWDC</div></div>
+<div class="card"><div style="font-weight:800;font-size:12px">Refs: <span id="refCount">0</span>/3</div><div style="margin-top:10px"><span class="dot" id="d1"></span><span class="dot" id="d2"></span><span class="dot" id="d3"></span></div><div style="font-size:11px;color:#666;margin-top:8px">Invite 3 friends to unlock unlimited withdraws. Each = 10 OWDC</div></div>
 </div>
 
-<!-- HOW IT WORKS -->
 <div class="page" id="how">
 <h2 style="color:#d4af37">📖 How It Works</h2>
-<div class="card"><div style="font-weight:800">🌍 What is OWDC?</div><div style="font-size:12px;color:#aaa;margin-top:8px;line-height:1.5">One World Digital Crypto is global cloud rewards. Earn 50 OWDC daily offline. No device mining. Rewards are promotional credits.</div></div>
-<div class="card"><div style="font-weight:800">⛏️ How to Mine?</div><div style="font-size:12px;color:#aaa;margin-top:8px">1. Tap START MINING<br>2. Keep app open or closed - It mines offline<br>3. Earns 50 OWDC per 24hrs<br>4. After 10 days = 500 OWDC = $5 USDT</div></div>
-<div class="card"><div style="font-weight:800">💸 How to Withdraw?</div><div style="font-size:12px;color:#aaa;margin-top:8px">1. Reach 500 OWDC<br>2. Enter USDT BEP20 address<br>3. Tap Withdraw - Ad shows<br>4. WhatsApp admin receives request<br>5. Paid in 24hrs</div></div>
-<div class="card"><div style="font-weight:800">👥 Referral Rules</div><div style="font-size:12px;color:#aaa;margin-top:8px">- 1st withdraw: FREE, no referrals<br>- 2nd withdraw: Need 3 referrals<br>- Each referral = 10 OWDC bonus<br>- Friend gets 10 OWDC free</div></div>
+<div class="card"><div style="font-weight:800">1. Mine</div><div style="font-size:12px;color:#aaa;margin-top:6px">Tap START MINING. Earns 50 OWDC/day even offline.</div></div>
+<div class="card"><div style="font-weight:800">2. Invite</div><div style="font-size:12px;color:#aaa;margin-top:6px">Share code. Get 10 OWDC per friend. Friend gets 10 free.</div></div>
+<div class="card"><div style="font-weight:800">3. Withdraw</div><div style="font-size:12px;color:#aaa;margin-top:6px">Reach 500 OWDC = $5 USDT BEP20. WhatsApp admin pays in 24hrs.</div></div>
 </div>
 
-<!-- SUPPORT -->
 <div class="page" id="support">
 <h2 style="color:#00ff88">💬 Support</h2>
-<div class="card"><div style="font-weight:800">WhatsApp Admin</div><div style="font-size:13px;color:#aaa;margin-top:8px">For withdraws, issues, partnership</div><div style="margin-top:12px;background:#25D366;padding:14px;border-radius:10px;text-align:center;font-weight:800;color:#fff;cursor:pointer" onclick="window.open('https://wa.me/2348163172077','_blank')">📱 Chat on WhatsApp<br><span style="font-size:11px">08163172077</span></div></div>
-<div class="card"><div style="font-weight:800">Email</div><div style="font-size:12px;color:#aaa;margin-top:6px">oneworlddigitalcrypto@gmail.com</div></div>
+<div class="card"><div style="font-weight:800">WhatsApp</div><div style="font-size:12px;color:#aaa;margin-top:6px">For withdraws & help</div><div style="margin-top:12px;background:#25D366;padding:14px;border-radius:10px;text-align:center;font-weight:800;color:#fff;cursor:pointer" onclick="window.open('https://wa.me/2348163172077','_blank')">📱 08163172077 - Tap to Chat</div></div>
 </div>
 
-<!-- ABOUT -->
 <div class="page" id="about">
 <h2 style="color:#d4af37">🌍 About OWDC</h2>
-<div class="card"><div style="font-size:12px;color:#aaa;line-height:1.6">One World Digital Crypto - One World, One Coin, One Future.<br><br>Vision: A single digital coin for the whole world, earnable offline without internet, redeemable for USDT.<br><br>50 OWDC/day • 500 OWDC = $5 USDT BEP20<br>Offline mining, AdMob supported, 100% free.<br><br>Built in Port Harcourt, for the World.<br><br><b style="color:#d4af37">OWDC V2 - Menu Edition - 2026</b></div></div>
+<div class="card"><div style="font-size:12px;color:#aaa;line-height:1.6">One World Digital Crypto - One World, One Coin, One Future.<br><br>50 OWDC/day offline • 500 = $5 USDT BEP20<br>Built in PH, for the World.<br><br><b style="color:#d4af37">V3 Fixed - No Image Needed</b></div></div>
 </div>
 
 <script>
-const RATE=50/86400,MIN=500,USD=0.01,WA="2348163172077";
-let bal=parseFloat(localStorage.getItem('b')||'0'),code=localStorage.getItem('c')||'',refs=parseInt(localStorage.getItem('r')||'0'),wc=parseInt(localStorage.getItem('wc')||'0'),mining=(localStorage.getItem('m')==='1'),last=parseInt(localStorage.getItem('l')||Date.now()),today=parseFloat(localStorage.getItem('today')||'0');
-if(!code){code='OWDC'+Math.floor(1000+Math.random()*9000);localStorage.setItem('c',code);}
-function save(){localStorage.setItem('b',bal);localStorage.setItem('r',refs);localStorage.setItem('wc',wc);localStorage.setItem('l',Date.now());localStorage.setItem('m',mining?'1':'0');localStorage.setItem('today',today);let w=document.getElementById('walletAddr').value;if(w)localStorage.setItem('w',w);}
-function ui(){let bTxt=bal.toFixed(4)+' OWDC';document.getElementById('bal').innerText=bTxt;document.getElementById('bal2').innerText=bTxt;document.getElementById('usd').innerText='≈ $'+(bal*USD).toFixed(2)+' USDT';document.getElementById('usd2').innerText='≈ $'+(bal*USD).toFixed(2)+' USDT';document.getElementById('codeBig').innerText=code;document.getElementById('drawerCode').innerText='Code: '+code;document.getElementById('refCount').innerText=refs;document.getElementById('wn').innerText=wc+1;document.getElementById('walletAddr').value=localStorage.getItem('w')||'';document.getElementById('d1').className='dot'+(refs>=1?' on':'');document.getElementById('d2').className='dot'+(refs>=2?' on':'');document.getElementById('d3').className='dot'+(refs>=3?' on':'');document.getElementById('todayEarn').innerText=today.toFixed(2)+' OWDC';let btn=document.getElementById('mineBtn');if(mining){btn.innerText='⚡ MINING - TAP TO STOP';btn.className='btn mining';document.getElementById('mineStatus').innerText='MINING... 50/DAY';}else{btn.innerText='▶ START MINING 50 OWDC/DAY';btn.className='btn';document.getElementById('mineStatus').innerText='PAUSED';}}
-window.openMenu=function(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
-window.closeMenu=function(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
-window.showPage=function(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.menuItem').forEach(m=>m.classList.remove('active'));if(el)el.classList.add('active');closeMenu();window.scrollTo(0,0);}
-window.toggleMine=function(){if(!mining)last=Date.now();mining=!mining;localStorage.setItem('l',Date.now());save();ui();}
-setInterval(function(){if(mining){let now=Date.now();let diff=(now-last)/1000;if(diff>0&&diff<5){bal+=diff*RATE;today+=diff*RATE;last=now;save();ui();}}},1000);
-(function(){let sl=parseInt(localStorage.getItem('l')||'0');if(mining&&sl){let diff=(Date.now()-sl)/1000;if(diff>5&&diff<432000){bal+=diff*RATE;today+=diff*RATE;last=Date.now();save();}}ui();})();
-window.invite=function(){let link='https://dejay-30.github.io/OWDC/';let msg='🌍 ONE WORLD DIGITAL CRYPTO - OWDC! Earn 50 OWDC/day OFFLINE = $5 per 10 days! My code '+code+' gives you 10 OWDC FREE! Download: '+link+' Code: '+code;if(navigator.share){navigator.share({text:msg});}else{alert(msg);}refs++;bal+=10;today+=10;save();ui();}
-window.withdraw=function(){let w=document.getElementById('walletAddr').value.trim();localStorage.setItem('w',w);if(bal<MIN)return alert('Need '+MIN+' OWDC = $'+(MIN*USD).toFixed(2));if(wc>=1&&refs<3)return alert('Need 3 referrals, you have '+refs+'/3');if(!w||w.length<10)return alert('Enter USDT address');document.getElementById('note').innerText='⏳ Showing ad... 3 sec';setTimeout(function(){let m='*OWDC WITHDRAW*%0AAmount: '+bal.toFixed(2)+' OWDC ($'+(bal*USD).toFixed(2)+')%0AWallet: '+w+'%0ACode: '+code+'%0ARefs: '+refs+'%0ANo: '+(wc+1);wc++;let hist=document.getElementById('hist');hist.innerHTML='✅ Withdraw #'+wc+' sent: $'+(bal*USD).toFixed(2)+' to '+w.substring(0,10)+'... - Paid in 24hrs<br>'+hist.innerHTML;bal=0;today=0;save();ui();document.getElementById('note').innerText='Sent! Paid in 24hrs';window.open('https://wa.me/'+WA+'?text='+m,'_blank');},3000);}
+var RATE=50/86400,MIN=500,USD=0.01,WA="2348163172077";
+var bal=parseFloat(localStorage.getItem('b')||'0');
+var myCode=localStorage.getItem('c')||'';
+var refs=parseInt(localStorage.getItem('r')||'0');
+var wc=parseInt(localStorage.getItem('wc')||'0');
+var mining=(localStorage.getItem('m')==='1');
+var last=parseInt(localStorage.getItem('l')||Date.now());
+var today=parseFloat(localStorage.getItem('today')||'0');
+if(!myCode || myCode.length<5){myCode='OWDC'+Math.floor(1000+Math.random()*9000);localStorage.setItem('c',myCode);}
+function save(){localStorage.setItem('b',bal);localStorage.setItem('r',refs);localStorage.setItem('wc',wc);localStorage.setItem('l',Date.now());localStorage.setItem('m',mining?'1':'0');localStorage.setItem('today',today);var w=document.getElementById('walletAddr');if(w&&w.value)localStorage.setItem('w',w.value);}
+function ui(){document.getElementById('bal').innerText=bal.toFixed(4)+' OWDC';document.getElementById('bal2').innerText=bal.toFixed(4)+' OWDC';document.getElementById('usd').innerText='≈ $'+(bal*USD).toFixed(2)+' USDT';document.getElementById('usd2').innerText='≈ $'+(bal*USD).toFixed(2)+' USDT';document.getElementById('codeBig').innerText=myCode;document.getElementById('drawerCode').innerText='Code: '+myCode;document.getElementById('refCount').innerText=refs;document.getElementById('wn').innerText=wc+1;var wl=localStorage.getItem('w')||'';var wa=document.getElementById('walletAddr');if(wa&&wl)wa.value=wl;document.getElementById('d1').className='dot'+(refs>=1?' on':'');document.getElementById('d2').className='dot'+(refs>=2?' on':'');document.getElementById('d3').className='dot'+(refs>=3?' on':'');document.getElementById('todayEarn').innerText=today.toFixed(2)+' OWDC';var b=document.getElementById('mineBtn');if(mining){b.innerText='⚡ MINING - TAP TO STOP';b.className='btn mining';document.getElementById('mineStatus').innerText='MINING 50/DAY';}else{b.innerText='▶ START MINING 50 OWDC/DAY';b.className='btn';document.getElementById('mineStatus').innerText='READY OFFLINE';}}
+function openMenu(){document.getElementById('drawer').classList.add('open');document.getElementById('overlay').classList.add('show');}
+function closeMenu(){document.getElementById('drawer').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function showPage(id,el){var pages=document.querySelectorAll('.page');for(var i=0;i<pages.length;i++){pages[i].classList.remove('active');}document.getElementById(id).classList.add('active');var items=document.querySelectorAll('.menuItem');for(var j=0;j<items.length;j++){items[j].classList.remove('active');}if(el)el.classList.add('active');closeMenu();window.scrollTo(0,0);}
+function toggleMine(){if(!mining)last=Date.now();mining=!mining;localStorage.setItem('l',Date.now());save();ui();}
+setInterval(function(){if(mining){var now=Date.now();var diff=(now-last)/1000;if(diff>0&&diff<5){bal+=diff*RATE;today+=diff*RATE;last=now;save();ui();}}},1000);
+(function(){var sl=parseInt(localStorage.getItem('l')||'0');if(mining&&sl){var diff=(Date.now()-sl)/1000;if(diff>5&&diff<432000){bal+=diff*RATE;today+=diff*RATE;last=Date.now();save();}}ui();})();
+function invite(){var link='https://dejay-30.github.io/OWDC/';var msg='🌍 ONE WORLD DIGITAL CRYPTO - OWDC! Earn 50 OWDC/day OFFLINE = $5 per 10 days! My code '+myCode+' gives you 10 OWDC FREE! Download: '+link+' Code: '+myCode;if(navigator.share){navigator.share({text:msg});}else{alert(msg);}refs++;bal+=10;today+=10;save();ui();}
+function withdraw(){var w=document.getElementById('walletAddr').value.trim();localStorage.setItem('w',w);if(bal<MIN){alert('Need '+MIN+' OWDC = $'+(MIN*USD).toFixed(2)+' - You have '+bal.toFixed(2));return;}if(wc>=1&&refs<3){alert('Need 3 referrals, you have '+refs+'/3 for withdraw #'+(wc+1));return;}if(!w||w.length<10){alert('Enter USDT BEP20 address');return;}document.getElementById('note').innerText='⏳ Showing ad 3 sec...';setTimeout(function(){var m='*OWDC WITHDRAW*%0AAmount: '+bal.toFixed(2)+' OWDC ($'+(bal*USD).toFixed(2)+')%0AWallet: '+w+'%0ACode: '+myCode+'%0ARefs: '+refs+'%0ANo: '+(wc+1);wc++;bal=0;today=0;save();ui();document.getElementById('note').innerText='Sent! Paid 24hrs via WhatsApp';window.open('https://wa.me/'+WA+'?text='+m,'_blank');},3000);}
 </script></body></html>
