@@ -1,0 +1,23 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OWDC Admin - Control Panel</title>
+<style>body{background:#0a0a0a;color:#fff;font-family:sans-serif;padding:20px}h1{color:#d4af37}input{padding:12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;width:100%;margin-top:10px}.btn{background:#d4af37;color:#000;padding:12px;border-radius:8px;font-weight:900;cursor:pointer;text-align:center;margin-top:10px;border:none;width:100%}.userCard{background:#151515;padding:12px;border-radius:10px;margin-top:10px;border:1px solid #222;display:flex;justify-content:space-between;align-items:center}.actions button{margin-left:5px;padding:6px 10px;border-radius:6px;border:none;cursor:pointer;font-weight:800}</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+</head><body>
+<h1>🌍 OWDC Admin Panel</h1><p style="color:#00ff88">2 OWDC=$1 • Control Users • Add/Subtract/Withdraw</p>
+<div id="login"><input id="pass" type="password" placeholder="Enter Admin Password (your Telegram number without +)"><div class="btn" onclick="login()">Login Admin</div></div>
+<div id="panel" style="display:none">
+<div style="margin-top:20px"><input id="search" placeholder="Search code e.g. OWDC1234" oninput="filter()"><div style="margin-top:10px">Total Users: <span id="count">0</span> • Total OWDC: <span id="total">0</span></div></div>
+<div id="users" style="margin-top:15px"></div>
+</div>
+<script>
+const ADMIN_PASS="8163172077";
+const firebaseConfig={apiKey:"YOUR_API_KEY",authDomain:"owdc-app.firebaseapp.com",databaseURL:"https://owdc-app-default-rtdb.firebaseio.com",projectId:"owdc-app",storageBucket:"owdc-app.appspot.com",messagingSenderId:"123456789",appId:"1:123456789:web:abcdef"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+let allUsers=[];
+function login(){if(document.getElementById('pass').value===ADMIN_PASS){document.getElementById('login').style.display='none';document.getElementById('panel').style.display='block';loadUsers();}else{alert('Wrong password');}}
+function loadUsers(){db.ref('users').on('value',snap=>{allUsers=[];let total=0;if(!snap.exists()){document.getElementById('users').innerHTML='No users yet';return;}snap.forEach(child=>{let u=child.val();u.key=child.key;allUsers.push(u);total+=parseFloat(u.balance||0);});document.getElementById('count').innerText=allUsers.length;document.getElementById('total').innerText=total.toFixed(2)+' OWDC ($'+(total*0.5).toFixed(2)+')';render(allUsers);});}
+function render(list){let html='';list.forEach(u=>{html+=`<div class="userCard"><div><b style="color:#d4af37">${u.code}</b><br><span style="font-size:12px">${(u.balance||0).toFixed(2)} OWDC = $${(u.balance*0.5||0).toFixed(2)} • Refs:${u.refs||0} • WC:${u.wc||0}<br><span style="font-size:10px;color:#888">${u.wallet||'No wallet'} • ${new Date(u.lastSeen||0).toLocaleString()}</span></div><div class="actions"><button style="background:#00ff88" onclick="edit('${u.key}',${u.balance||0},1)">+100</button><button style="background:#ffcc00" onclick="edit('${u.key}',${u.balance||0},-1)">-100</button><button style="background:#ff4444;color:#fff" onclick="edit('${u.key}',0,0)">0</button><button style="background:#0088cc;color:#fff" onclick="window.open('https://t.me/+2348163172077?text=Hi ${u.code}, your withdraw of ${u.balance} OWDC','_blank')">Chat</button></div></div>`;});document.getElementById('users').innerHTML=html||'No users';}
+function filter(){let q=document.getElementById('search').value.toLowerCase();let f=allUsers.filter(u=>u.code.toLowerCase().includes(q));render(f);}
+function edit(key,current,dir){let amount=0;if(dir===0){if(!confirm('Reset '+key+' balance to 0?'))return;amount=0;}else if(dir===1){let v=prompt('How much to ADD to '+key+'? Current: '+current,'100');if(!v)return;amount=current+parseFloat(v);}else{let v=prompt('How much to SUBTRACT from '+key+'? Current: '+current,'100');if(!v)return;amount=current-parseFloat(v);}db.ref('users/'+key).update({balance:amount,adminSet:true});db.ref('users/'+key).once('value').then(s=>{let u=s.val();db.ref('logs/'+Date.now()).set({code:key,action:dir===0?'reset':dir===1?'add':'subtract',amount:amount,old:current,time:Date.now()});});alert('Updated '+key+' to '+amount+' OWDC');}
+</script></body></html>
